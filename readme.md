@@ -18,8 +18,8 @@ The NFT Minting System is a project developed by [Your Name] to enable the creat
 To use the NFT Minting System, follow these steps:
 
 1. **Prerequisites:** Ensure that you have a compatible web browser and a wallet compatible with the chosen blockchain platform (e.g., MetaMask for Ethereum-based networks).
-2. **Installation:** Clone the project repository from [GitHub link] or download the project files to your local machine.
-3. **Dependencies:** Install any required dependencies by running `npm install` or referring to the project's documentation.
+2. **Installation:** Clone the project repository from https://github.com/PrateekSavanur/NFT-Hardhat.git or download the project files to your local machine.
+3. **Dependencies:** Install any required dependencies by running `npm install` .
 4. **Configuration:** Update the configuration file with the necessary parameters, such as the blockchain network URL, wallet provider details, and any other required settings.
 5. **Build and Launch:** Build the project using the provided build commands and launch the application locally or deploy it to a web server.
 6. **Access the System:** Open the project in your web browser, connect your wallet to the application, and start creating and minting your own NFTs!

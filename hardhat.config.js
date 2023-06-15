@@ -32,7 +32,22 @@ module.exports = {
         noColors: true,
         coinmarketcap: COINMARKETCAP_API_KEY,
     },
-    solidity: "0.8.17",
+    solidity: {
+        compilers: [
+            {
+                version: "0.8.8",
+            },
+            {
+                version: "0.5.0",
+            },
+            {
+                version: "0.5.5",
+            },
+            {
+                version: "0.6.0",
+            },
+        ],
+    },
     namedAccounts: {
         deployer: {
             default: 0,

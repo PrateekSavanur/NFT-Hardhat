@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.8;
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 
@@ -10,7 +11,7 @@ error RandomIpfsNft__NeedMoreETHSent();
 error RandomIpfsNft__RangeOutOfBounds();
 error RandomIpfsNft__TransferFailed();
 
-contract ipfsNFT is VRFConsumerBaseV2, ERC721 {
+contract ipfsNFT is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
     enum Player {
         Virat,
         A_B_Devilliers,

@@ -1,10 +1,11 @@
 const { network, ethers } = require("hardhat")
 const { networkConfig } = require("../helper-hardhat-config")
 const { verify } = require("../utils/verify")
+require("dotenv").config()
 
 const FUND_AMOUNT = "1000000000000000000000"
 
-const tokenURI = []
+const tokenURI = ["", "", ""]
 
 module.exports = async ({ deployments, getNamedAccounts }) => {
     const { deploy, log } = deployments
@@ -18,12 +19,13 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
         vrfCoordinatorAddress = vrfCoordinatorV2Mock.address
         const transactionResponse = await vrfCoordinatorV2Mock.createSubscription()
         const transactionReciept = await transactionResponse.wait(1)
+        subscriptionId = transactionReciept.events[0].args.subId
 
         log(transactionReciept)
 
         subsciptionId = await transactionReciept.events[0].args.subId
 
-        await vrfCoordinatorV2Mock.fundSubsciption(subsciptionId, FUND_AMOUNT)
+        await vrfCoordinatorV2Mock.fundSubscription(subscriptionId, FUND_AMOUNT)
     } else {
         vrfCoordinatorAddress = networkConfig[chainId][vrfCoordinatorV2]
         subsciptionId = networkConfig[chainId][subsciptionId]
@@ -31,12 +33,16 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
 
     log("__________________________________________________________________________")
 
+    let gaslane = networkConfig[chainId]["gasLane"]
+    let mintfee = networkConfig[chainId]["mintFee"]
+    let callbackGaslimit = networkConfig[chainId]["callbackGasLimit"]
+
     const args = [
         vrfCoordinatorAddress,
         subsciptionId,
-        networkConfig[chainId][gasLane],
-        networkConfig[chainId][mintFee],
-        networkConfig[chainId][callbackGasLimit],
+        gaslane,
+        mintfee,
+        callbackGaslimit,
         tokenURI,
     ]
 
@@ -47,7 +53,7 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
     })
 
     if (chainId == 31337) {
-        await vrfCoordinatorV2Mock.addConsumer(subscriptionId, randomIpfsNft.address)
+        await vrfCoordinatorV2Mock.addConsumer(subscriptionId, ipfsNft.address)
     }
 
     if (chainId != 31337) {
